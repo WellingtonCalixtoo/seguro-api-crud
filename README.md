@@ -106,10 +106,6 @@ Os endpoints podem ser testados utilizando:
 
 Postman
 
-ou
-
-Insomnia
-
 Autor
 
 Wellington Costa
