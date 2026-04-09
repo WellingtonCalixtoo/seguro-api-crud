@@ -8,6 +8,8 @@ import com.wellington.seguroapi.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService {
@@ -22,5 +24,29 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario = repository.save(usuario);
 
         return UsuarioMapper.toDTO(usuario);
+    }
+
+    @Override
+    public UsuarioDTO buscarPorId(Long id) {
+
+        Usuario usuario = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+
+        return UsuarioMapper.toDTO(usuario);
+    }
+
+    @Override
+    public List<UsuarioDTO> listar() {
+
+        return repository.findAll()
+                .stream()
+                .map(UsuarioMapper::toDTO)
+                .toList();
+    }
+
+    @Override
+    public void deletar(Long id) {
+
+        repository.deleteById(id);
     }
 }
